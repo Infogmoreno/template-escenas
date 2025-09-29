@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.1.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.x.x/dist/aframe-template-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <script id="escena1" type="text/html">
+          <a-box color="red" position="1 0 -3"></a-box>
+          <a-sphere color="blue" position="1 0 -5"></a-sphere>
+          <a-box
+            class="box"
+            position="-1 0.5 -3"
+            rotation="0 45 0"
+            color="orange"
+            event-set__click="_target: #entidadprincipal; template: src: #escena2"
+          ></a-box>
+        </script>
+
+        <script id="escena2" type="text/html">
+          <a-cylinder color="green" position="-1 0 -3"></a-cylinder>
+          <a-cone color="yellow" position="-1 0 0"></a-cone>
+          <a-sphere
+            class="esfera"
+            position="0 1.25 -5"
+            radius="1.25"
+            color="#EF2D5E"
+            animation="property: scale; to: 1.5 1.5 1.5; dur: 300; startEvents: proxiedclick"
+            event-set__proxiedclick="material.color: yellow; scale: 1.5 1.5 1.5"
+            event-set__click="_target: #entidadprincipal; template: src: #escena1"
+          ></a-sphere>
+          <a-cylinder
+            position="1 0.75 -5"
+            radius="0.5"
+            height="1"
+            color="#FFC65D"
+          ></a-cylinder>
+          <a-plane
+            position="0 0 -4"
+            rotation="-90 0 0"
+            width="4"
+            height="4"
+            color="#7BC8A4"
+          ></a-plane>
+        </script>
+      </a-assets>
+
+      <!-- Entidad que gestiona el intercambio -->
+      <a-entity id="entidadprincipal" template="src: #escena1"> </a-entity>
+      <!-- Entidad principal -->
+
+      <a-sky color="#ECECEC"></a-sky>
+
+      <a-scene>
+        <!-- Definición de plantillas -->
+      </a-scene>
+
+      <a-camera>
+        <a-entity
+          cursor="fuse: false; fuseTimeout: 1000; rayOrigin: mouse"
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+          material="color: black; shader: flat"
+          raycaster="objects: *"
+        >
+        </a-entity>
+      </a-camera>
+    </a-scene>
+  </body>
+</html>
