@@ -6,53 +6,109 @@
     <script src="https://unpkg.com/aframe-template-component@3.x.x/dist/aframe-template-component.min.js"></script>
   </head>
   <body>
-    <a-scene>
+    <a-scene
+      renderer="antialias: true;
+                   colorManagement: true;
+                   sortTransparentObjects: true;
+                   maxCanvasWidth: 1920;
+                   maxCanvasHeight: 1920;
+                   exposure: 0.5"
+      xr-mode-ui="XRMode: ar;"
+      ar-hit-test="target:#entidadprincipal;"
+      reflection="directionalLight:a-light#dirlight;"
+      toneMapping="neutral"
+      shadow="type: pcfsoft; enable: true; autoupdate: true"
+    >
       <a-assets>
+        <a-cubemap id="pisa">
+          <img src="https://threejs.org/examples/textures/cube/pisa/px.png" />
+          <img src="https://threejs.org/examples/textures/cube/pisa/nx.png" />
+          <img src="https://threejs.org/examples/textures/cube/pisa/py.png" />
+          <img src="https://threejs.org/examples/textures/cube/pisa/ny.png" />
+          <img src="https://threejs.org/examples/textures/cube/pisa/pz.png" />
+          <img src="https://threejs.org/examples/textures/cube/pisa/nz.png" />
+        </a-cubemap>
+
         <script id="escena1" type="text/html">
-          <a-box color="red" position="1 0 -3"></a-box>
-          <a-sphere color="blue" position="1 0 -5"></a-sphere>
+          <a-box
+            color="red"
+            position="1 0 -3"
+            shadow="receive: true; castShadow: true"
+          ></a-box>
+          <a-sphere
+            color="blue"
+            position="1 0 -5"
+            shadow="receive: true; castShadow: true"
+          ></a-sphere>
           <a-box
             class="box"
             position="-1 0.5 -3"
             rotation="0 45 0"
             color="orange"
+            shadow="receive: true; castShadow: true"
             event-set__click="_target: #entidadprincipal; template: src: #escena2"
           ></a-box>
+          <a-light
+            id="dirlight"
+            intensity="0.7"
+            light="castShadow:true;"
+            type="directional"
+            position="1 1 0"
+            target="#box"
+          ></a-light>
         </script>
 
         <script id="escena2" type="text/html">
-          <a-cylinder color="green" position="-1 0 -3"></a-cylinder>
-          <a-cone color="yellow" position="-1 0 0"></a-cone>
+          <a-cylinder
+            color="green"
+            position="-1 0 -3"
+            shadow="receive: true; castshadow: true"
+          ></a-cylinder>
+          <a-cone
+            color="yellow"
+            position="-1 0 0"
+            shadow="receive: true; castShadow: true"
+          ></a-cone>
           <a-sphere
             class="esfera"
             position="0 1.25 -5"
             radius="1.25"
-            color="#EF2D5E"
+            material="type: standard; color:#EF2D5E; roughness: 0.4; metalness:0.6"
             animation="property: scale; to: 1.5 1.5 1.5; dur: 300; startEvents: proxiedclick"
             event-set__proxiedclick="material.color: yellow; scale: 1.5 1.5 1.5"
             event-set__click="_target: #entidadprincipal; template: src: #escena1"
+            shadow="receive: true; castShadow: true"
           ></a-sphere>
           <a-cylinder
             position="1 0.75 -5"
             radius="0.5"
             height="1"
             color="#FFC65D"
+            shadow="receive: true; castShadow: true"
           ></a-cylinder>
           <a-plane
-            position="0 0 -4"
+            position="0 -1 -4"
             rotation="-90 0 0"
-            width="4"
-            height="4"
+            width="12"
+            height="12"
             color="#7BC8A4"
+            shadow="receive: true"
           ></a-plane>
+          <a-light
+            id="dirlight"
+            intensity="1"
+            light="castShadow:true;"
+            type="directional"
+            position="1 1 0"
+            target="#esfera"
+          ></a-light>
         </script>
       </a-assets>
 
       <!-- Entidad que gestiona el intercambio -->
       <a-entity id="entidadprincipal" template="src: #escena1"> </a-entity>
+      <a-entity id="target_directlight" position="0 0 -2"></a-entity>
       <!-- Entidad principal -->
-
-      <a-sky color="#ECECEC"></a-sky>
 
       <a-scene>
         <!-- Definición de plantillas -->
