@@ -54,8 +54,9 @@
             light="castShadow:true;"
             type="directional"
             position="1 1 0"
-            target="#box"
+            target="#target_directlight"
           ></a-light>
+          <a-entity id="target_directlight" position="0 0 -2"></a-entity>
         </script>
 
         <script id="escena2" type="text/html">
@@ -100,14 +101,15 @@
             light="castShadow:true;"
             type="directional"
             position="1 1 0"
-            target="#esfera"
+            target="#target_directlight"
           ></a-light>
+          <a-entity id="target_directlight" position="0 0 -2"></a-entity>
         </script>
       </a-assets>
 
       <!-- Entidad que gestiona el intercambio -->
       <a-entity id="entidadprincipal" template="src: #escena1"> </a-entity>
-      <a-entity id="target_directlight" position="0 0 -2"></a-entity>
+      
       <!-- Entidad principal -->
 
       <a-scene>
@@ -127,3 +129,4 @@
     </a-scene>
   </body>
 </html>
+
