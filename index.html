@@ -46,7 +46,7 @@
             rotation="0 45 0"
             color="orange"
             shadow="receive: true; castShadow: true"
-            event-set__touchstart="_event: touchstart; _target: #entidadprincipal; template: src: #escena2"
+            event-set__click="_target: #entidadprincipal; template: src: #escena2"
           ></a-box>
           <a-light
             id="dirlight"
@@ -77,7 +77,7 @@
             material="type: standard; color:#EF2D5E; roughness: 0.4; metalness:0.6"
             animation="property: scale; to: 1.5 1.5 1.5; dur: 300; startEvents: proxiedclick"
             event-set__proxiedclick="material.color: yellow; scale: 1.5 1.5 1.5"
-            event-set__touchstart="_event: touchstart; _target: #entidadprincipal; template: src: #escena1"
+            event-set__click=" _target: #entidadprincipal; template: src: #escena1"
             shadow="receive: true; castShadow: true"
           ></a-sphere>
           <a-cylinder
@@ -129,6 +129,7 @@
     </a-scene>
   </body>
 </html>
+
 
 
 
